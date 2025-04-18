@@ -165,8 +165,8 @@ Los códigos de error posibles son:
 
 ## Contribuciones
 
-Las contribuciones son bienvenidas. Por favor, siente libre de abrir un issue o enviar un pull request.
+...
 
 ## Licencia
 
-Este proyecto es privado y su uso está restringido a los términos establecidos por el propietario.
+...
