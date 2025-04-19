@@ -1,12 +1,7 @@
-import express from "express";
-import TMDb from "../utils/tmdb.js";
-import { 
-	BadRequestError,
-	ForbiddenError,
-	NotFoundError,
-	CustomError,
-} from "../middlewares/errorMiddleware.js";
 
+import TMDb from "../utils/tmdb.js";
+import { PROVIDERS } from "./providers_list.js";
+import { BadRequestError, NotFoundError, CustomError, } from "../middlewares/errorMiddleware.js";
 import {
 	cine24hResolver,
 	cinecalidadResolver,
@@ -17,27 +12,11 @@ import {
 	streamsitoResolver
 } from "../scrapers/_index.js";
 
-const router = express.Router();
+// Configuracion para TMDb de los resultados en español
 const tmdb = new TMDb({ language: 'es-MX' });
 
-// Definir los proveedores como una constante
-const PROVIDERS = [
-	"embed69",
-	"streamsito",
-	"playdede",
-	"riveEmbed",
-	"riveStream",
-	"cinecalidad",
-	"cine24h"
-];
-
-// Endpoint para obtener los proveedores disponibles
-router.get("/providers", (req, res) => {
-	res.status(200).json({ providers: PROVIDERS });
-});
-
-// Endpoint para obtener las fuentes de un proveedor específico
-router.get("/:provider", async (req, res, next) => {
+// Funcion para obtener las fuentes de un proveedor específico
+export const getSource = async (req, res, next) => {
 	const { id: TMDb_ID, season, episode } = req.query;
 	const { provider } = req.params;
 
@@ -93,7 +72,7 @@ router.get("/:provider", async (req, res, next) => {
 			const response = await resolvers[provider](variables);
 			res.status(200).json(response);
 		} catch (error) {
-			throw new CustomError({ 
+			throw new CustomError({
 				message: `El proveedor '${provider}' falló al obtener las fuentes.`,
 				code: 500
 			});
@@ -101,6 +80,4 @@ router.get("/:provider", async (req, res, next) => {
 	} catch (error) {
 		next(error);
 	}
-});
-
-export default router;
+};

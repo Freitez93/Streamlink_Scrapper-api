@@ -96,13 +96,14 @@ const combinedMap = new Map([
 /**
  * Extracts and normalizes server name from a URL
  *
- * @param {string} url - The URL to extract server name from
+ * @param {string} baseURL - The URL to extract server name from
  * @returns {string} - The normalized server name
  */
-export const getServerName = url => {
+export const getServerName = baseURL => {
 	try {
-		const host = new URL(url).host;
-		const domain = host.split('.')[0];
+		const host = new URL(baseURL).host;
+		const hostSplit = host.split('.');
+		const domain = hostSplit[0] === 'wwww' ? hostSplit[1] : hostSplit[0];
 
 		// Check if domain is in the combined mapping
 		if (combinedMap.has(domain)) {
