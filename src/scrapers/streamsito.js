@@ -62,7 +62,7 @@ class streamsitoResolver {
 			}
 
 			// Verificar si se agregaron fuentes
-			if (this.responseData.sources.length > 0) {
+			if (this.responseData.source.length > 0) {
 				this.responseData.status = 'success';
 			}
 
