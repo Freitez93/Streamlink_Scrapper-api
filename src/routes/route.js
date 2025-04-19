@@ -1,7 +1,7 @@
 import express from "express";
-import { welcome } from "../controllers/welcome";
-import { providers_list } from "../controllers/providers_list";
-import { getSource } from "../controllers/getSource";
+import { welcome } from "../controllers/welcome.js";
+import { providers_list } from "../controllers/providers_list.js";
+import { getSource } from "../controllers/getSource.js";
 
 const router = express.Router();
 
