@@ -103,7 +103,7 @@ export const getServerName = baseURL => {
 	try {
 		const host = new URL(baseURL).host;
 		const hostSplit = host.split('.');
-		const domain = hostSplit[0] === 'wwww' ? hostSplit[1] : hostSplit[0];
+		const domain = hostSplit[0] === 'www' ? hostSplit[1] : hostSplit[0];
 
 		// Check if domain is in the combined mapping
 		if (combinedMap.has(domain)) {
