@@ -2,8 +2,8 @@ import NodeCache from 'node-cache';
 import { config } from 'dotenv';
 
 config();
-const debug = true;
-const timer = parseInt(process.env.CACHE_TTL, 10) * 60;
+const debug = process.env.CACHE_DEBUG === 'true';
+const timer = parseInt(process.env.CACHE_TTL ?? 720, 10) * 60;  // Tiempo de expiración, 12h por defecto.
 const cache = new NodeCache({
 	stdTTL: timer,
 	checkperiod: 600 // Intervalo de revisión de expiración (10 minutos)
